@@ -19,13 +19,20 @@ class MainActivity : ComponentActivity() {
                 horizontalAlignment = Alignment.CenterHorizontally,
                 modifier = Modifier.fillMaxSize()
             ) {
+                DisplaySliderWithStepper()
+                DisplaySlider()
+                DisplayLinearProgressBarTwo()
+                DisplayLinearProgressBar()
+                DisplayCircularProgressBarTwo()
+                DisplayCircularProgressBar()
+                DisplaySurface()
                 DiplaySwitch()
                 DisplayRadioButton()
                 DisplayOutlineButton()
-                DisplayPrimaryButton()
-                DisplayPassword()
-                DisplayTextField()
-                DisplayOutlinedTextField()
+//                DisplayPrimaryButton()
+//                DisplayPassword()
+//                DisplayTextField()
+//                DisplayOutlinedTextField()
             }
 
         }
