@@ -4,9 +4,7 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.*
 import androidx.compose.material.Text
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -61,6 +59,9 @@ class MainActivity : ComponentActivity() {
                     .padding(8.dp)
             ) {
                 TitleOfApp(title = "Jetpack Compose")
+                Text(text = "Chains Example", color = Color.Black, fontWeight = FontWeight.Bold, fontSize = 22.sp)
+                ConstrainWithChains()
+                Spacer(modifier = Modifier.height(5.dp))
                 ConstraintLayoutGuideLine()
                 Text(text = "Barrier Example", color = Color.Black, fontWeight = FontWeight.Bold, fontSize = 22.sp)
                 BarrierExample()

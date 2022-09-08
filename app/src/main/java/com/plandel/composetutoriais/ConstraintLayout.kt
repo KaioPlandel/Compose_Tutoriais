@@ -2,7 +2,6 @@ package com.plandel.composetutoriais
 
 import android.widget.Toast
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -25,6 +24,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.constraintlayout.compose.ChainStyle
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.ConstraintSet
 
@@ -97,11 +97,23 @@ fun ConstraintWithSet(constraintSet: ConstraintSet) {
             userName = it
         }, label = { Text(text = "Username") }, modifier = Modifier.layoutId("inputName"))
 
-        TextField(value = password, onValueChange = {
-            password = it
-        }, label = { Text(text = "Password", color = Color.Red)}, visualTransformation = PasswordVisualTransformation(), modifier = Modifier.layoutId("inputPassword"))
+        TextField(
+            value = password,
+            onValueChange = {
+                password = it
+            },
+            label = { Text(text = "Password", color = Color.Red) },
+            visualTransformation = PasswordVisualTransformation(),
+            modifier = Modifier.layoutId("inputPassword")
+        )
 
-        Button(onClick = { Toast.makeText(context, "Username $userName , Password: $password ", Toast.LENGTH_SHORT).show()}, modifier = Modifier.layoutId("buttonLogin")) {
+        Button(onClick = {
+            Toast.makeText(
+                context,
+                "Username $userName , Password: $password ",
+                Toast.LENGTH_SHORT
+            ).show()
+        }, modifier = Modifier.layoutId("buttonLogin")) {
             Text(text = "Login", fontWeight = FontWeight.Bold, color = Color.Black)
         }
     }
@@ -141,7 +153,7 @@ fun ConstraintLayoutGuideLine() {
         val guideLineFromTop = createGuidelineFromTop(0.2f) // aqui tem 20% de distancia no top
         val guideLineFromStart = createGuidelineFromStart(50.dp)
         Text(text = "GuildLine From Top and Start", modifier = Modifier.constrainAs(input) {
-            top.linkTo(guideLineFromTop,8.dp)
+            top.linkTo(guideLineFromTop, 8.dp)
             start.linkTo(guideLineFromStart, 8.dp)
             end.linkTo(parent.end, 8.dp)
         })
@@ -165,12 +177,38 @@ fun BarrierExample() {
         })
         Text(text = "Input 2", modifier = Modifier.constrainAs(input2) {
             top.linkTo(input1.bottom, 8.dp)
-            start.linkTo(parent.start,8.dp)
+            start.linkTo(parent.start, 8.dp)
         })
         Text(text = "Input 3", Modifier.constrainAs(input3) {
             top.linkTo(input1.bottom, 8.dp)
-            start.linkTo(barrier,8.dp)
+            start.linkTo(barrier, 8.dp)
         })
 
+    }
+}
+
+@Composable
+fun ConstrainWithChains() {
+    ConstraintLayout(modifier = Modifier
+        .fillMaxWidth()
+        .background(Color.Cyan)
+        .padding(12.dp)) {
+        val (button1, button2, button3) = createRefs()
+        createHorizontalChain(button1, button2, button3, chainStyle = ChainStyle.SpreadInside)
+        Button(onClick = { }, modifier = Modifier.constrainAs(button1){
+            centerHorizontallyTo(parent)
+        }) {
+            Text(text = "Button 1")
+        }
+        Button(onClick = { /*TODO*/ }, modifier = Modifier.constrainAs(button2) {
+            centerVerticallyTo(parent)
+        }) {
+            Text(text = "Button 2")
+        }
+        Button(onClick = { /*TODO*/ }, modifier = Modifier.constrainAs(button3){
+            centerHorizontallyTo(parent)
+        }) {
+            Text(text = "Button 3")
+        }
     }
 }
